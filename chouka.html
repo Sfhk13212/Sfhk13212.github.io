@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+</head>
+<body>
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1 id="resSt">点击计算这里将显示你的欧气</h1>
+                            </div>
+                            <p>此界面用于计算抽到一个就停止抽取的概率</p>
+                            <p>例如抽卡出NEW,出一个即可,然后停止抽</p>
+                            <p>如果未抽到,则将已抽取次数填入抽到所用次数</p>
+                            <p>则计算出的欧气可认为是相应的人数的欧气已经超过了你的欧气</p>
+                            <p>如果需要抽中多个,请点击右下角更换</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <div class="form-group">
+                                <input id="allT" class="input-material" type="text" name="registerUsername"
+                                       placeholder="输入抽到时所用次数">
+                            </div>
+                            <div class="form-group">
+                                <input id="p1" class="input-material" type="text" name="registerPassword"
+                                       placeholder="请输入概率">
+
+                            </div>
+
+                            <div class="form-group">
+                                <button id="start01" type="button" name="registerSubmit" class="btn btn-primary"
+                                        onclick="f01()">计算
+                                </button>
+                            </div>
+                            <small>计算科研欧气值</small><a href="index.html" class="signup">&nbsp;更换</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="core.js"></script>
+<script>
+
+    function f01() {
+        var all01 = document.getElementById("allT").value;
+        var p01 = document.getElementById("p1").value;
+        var res01 = stopW(all01, p01);
+        if (res01 == '请输入正确的数字') {
+            res01 = '请输入正确的数字'
+        } else {
+            res01 = "你的欧气超过了" + res01 + "%的人!";
+        }
+        document.getElementById("resSt").innerText = res01;
+    }
+
+</script>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+</head>
+<body>
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1 id="resCt">点击计算这里将显示你的欧气</h1>
+                            </div>
+                            <p>彩图的产出概率为1/11≈0.09090909<br>
+                            </p>
+                            <p>可改变概率来计算其他的需要中奖多次的抽卡的欧气&nbsp;</p>
+                            <p>如只需要抽中一个且抽中后即不再抽取,请按右下角更换&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <div class="form-group">
+                                <input id="ztzs" class="input-material" type="text" name="registerUsername"
+                                       placeholder="总图纸数">
+                            </div>
+                            <div class="form-group">
+                                <input id="cts" class="input-material" type="text" name="registerPassword"
+                                       placeholder="实际彩图数">
+
+                            </div>
+                            <div class="form-group">
+                                <input id="ctgl" class="input-material" type="text" name="registerPassword"
+                                       placeholder="彩图产出概率">
+
+                            </div>
+                            <div class="form-group">
+                                <button id="start01" type="button" name="registerSubmit" class="btn btn-primary"
+                                        onclick="f02()">计算
+                                </button>
+                            </div>
+                            <small>计算科研欧气值</small><a href="chouka.html" class="signup">&nbsp;更换</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="core.js"></script>
+<script>
+
+    function f02() {
+        var all02 = document.getElementById("ztzs").value;
+        var ac01 = document.getElementById("cts").value;
+        var p02 = document.getElementById("ctgl").value;
+        var res02 = contW(all02, p02, ac01);
+        if (res02 == '请输入正确的数字') {
+            res02 = '请输入正确的数字'
+        } else {
+            res02 = "你的欧气超过了" + res02 + "%的人!";
+        }
+        document.getElementById("resCt").innerText = res02;
+    }
+
+</script>
+</html>
