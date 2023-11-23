@@ -20,14 +20,15 @@
                     <div class="info d-flex align-items-center">
                         <div class="content">
                             <div class="logo">
-                                <h1 id="resCt">点击计算这里将显示你的欧气</h1>
+                                <h1 id="resSt">点击计算这里将显示期望</h1>
                             </div>
-                            <p>如果错误输入导致卡死请刷新</p>
-                            <p>概率需填写百分数,例如2%,"%"需要加上&nbsp;</p>
-                            <p>彩图的产出概率为1/11≈9.0909%</p>
-                            <p>可改变概率来计算其他的需要中奖多次的抽卡的欧气&nbsp;</p>
-                            <p>如果需要计算其他的内容,请点击右下角更换&nbsp;</p>
-
+                            <p>计算你抽齐(每种至少一个),所需次数的平均值</p>
+                            <p>概率输入方式:概率%概率%...</p>
+                            <p>例如两个2%,一个0.5%,两个2.5%则输入方式如下</p>
+                            <p>2%2%0.5%2.5%2.5%</p>
+                            <p>想要抽几个就输入几个概率%,只要一个则输入一个</p>
+                            <p>注意:概率不能为负数;概率之和不能大于1</p>
+                            <p>如果需要计算其他的内容,请点击右下角更换</p>
                         </div>
                     </div>
                 </div>
@@ -35,26 +36,18 @@
                     <div class="form d-flex align-items-center">
                         <div class="content">
                             <div class="form-group">
-                                <input id="ztzs" class="input-material" type="text" name="registerUsername"
-                                       placeholder="总图纸数">
-                            </div>
-                            <div class="form-group">
-                                <input id="cts" class="input-material" type="text" name="registerPassword"
-                                       placeholder="实际彩图数">
+                                <input id="p1" class="input-material" type="text" name="registerPassword"
+                                       placeholder="请输入概率">
 
                             </div>
-                            <div class="form-group">
-                                <input id="ctgl" class="input-material" type="text" name="registerPassword"
-                                       placeholder="彩图产出概率">
 
-                            </div>
                             <div class="form-group">
                                 <button id="start01" type="button" name="registerSubmit" class="btn btn-primary"
-                                        onclick="fIndex()">计算
+                                        onclick="fQi()">计算
                                 </button>
                             </div>
+                            <small>计算科研欧气值</small><a href="index.html" class="signup">&nbsp;更换</a>
                             <small>计算抽卡欧气值</small><a href="chouka.html" class="signup">&nbsp;更换</a>
-                            <small>计算抽卡期望</small><a href="qiwang.html" class="signup">&nbsp;更换</a>
                         </div>
                     </div>
                 </div>
@@ -66,18 +59,16 @@
 </body>
 <script src="core.js"></script>
 <script>
-
-    function fIndex() {
-        let a = document.getElementById("ztzs").value;
-        let c = document.getElementById("cts").value;
-        let p = document.getElementById("ctgl").value;
+    function fQi() {
+        let p = document.getElementById("p1").value;
         let res;
-        if (!eXt(a, p, c)) {
+        if (!qWt(p)) {
             res = "请输入正确的数字";
         } else {
-            res = "你的欧气超过了" + eX(a, p, c) + "%的人!";
+            res = Math.floor(qW(p) * 1000) / 1000;
+            res = "每种至少出一个,平均要抽" + res + "次!";
         }
-        document.getElementById("resCt").innerText = res;
+        document.getElementById("resSt").innerText = res;
     }
 
 </script>

@@ -1,57 +1,162 @@
-function luckyp1(n, p, ac) {
-    var b = Math.sqrt(n * p * (1 - p));
-    var de1 = ac - n * p;
-    var de = Math.floor((de1 / b) * 100);
-    var ind = de + 500;
-    if (ind < 0) {
+function s2a(str) {
+    let a = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] == '%')
+            a++;
+    }
+    if (a == 0) {
+        return false;
+    }
+    let res = new Array(a);
+    let z = "";
+    let b = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] != '%') {
+            z += str[i];
+        } else {
+            if (typeof Number(z) != NaN) {
+                res[b] = Number(z) / 100;
+                b++;
+                z = "";
+            } else {
+                return false;
+            }
+        }
+    }
+    return res;
+}
+
+function eX(n, str, a) {
+    let p = s2a(str)[0];
+    let b = Math.sqrt(n * p * (1 - p));
+    let d = a - n * p;
+    let c = Math.floor((d / b) * 100);
+    let i = c + 500;
+    if (i < 0) {
         return 0;
-    } else if (ind > 1000) {
+    } else if (i > 1000) {
         return 100
     }
-    var res = Math.floor(normalf[ind] * 100000) / 100000;
+    return Math.floor(normalf[i] * 100000) / 100000;
+}
+
+function qW(str) {
+    let farr = s2a(str);
+    let le = farr.length;
+    let res = 0;
+    for (let i = 1; i <= farr.length; i++) {
+        let a = new Array(i);
+        if (i % 2 == 1) {
+            res += cQ(0, 0, a, i, le, farr);
+        }
+        if (i % 2 == 0) {
+            res -= cQ(0, 0, a, i, le, farr);
+        }
+    }
     return res;
 }
 
-function luckyp2(n, p) {
-    var res = 1;
-    var q = 1 - p;
-    for (i = 0; i < n; i++) {
-        var z = p;
-        for (j = 0; j < i; j++) {
-            z *= q;
+function gL(str, s) {
+    let farr = s2a(str);
+    let le = farr.length;
+    let res = 0;
+    for (let i = 1; i <= farr.length; i++) {
+        let a = new Array(i);
+        if (i % 2 == 1) {
+            res += cP(0, 0, a, i, le, farr, s);
         }
-        res -= z;
-        if (res < 0.000001) {
-            return 0;
+        if (i % 2 == 0) {
+            res -= cP(0, 0, a, i, le, farr, s);
         }
     }
-    res = Math.floor(res * 100000) / 1000;
     return res;
 }
 
-function stopW(n, p) {
-    n = Number(n);
-    p = Number(p);
-    if (Number.isInteger(n) && p > 0 && p < 1 && n > 0) {
-        return luckyp2(n, p);
-    } else {
-        return "请输入正确的数字";
+function cP(c, d, a, n, m, b, s) {
+    let res = 0;
+    if (c == n) {
+        let z = 1;
+        for (let i = 0; i < n; i++) {
+            z -= b[a[i]];
+        }
+        return Math.pow(z, s);
     }
+    for (let i = d; i < m; i++) {
+        a[c] = i;
+        res += cP(c + 1, i + 1, a, n, m, b, s);
+    }
+    return res;
 }
 
-function contW(n, p, ac) {
-    n = Number(n);
-    p = Number(p);
-    ac = Number(ac);
-    if (Number.isInteger(n) && Number.isInteger(ac) && p > 0 && p < 1 && ac > 0 && ac < n) {
-        return luckyp1(n, p, ac);
-    } else {
-        return "请输入正确的数字";
+function cQ(c, d, a, n, m, b) {
+    let res = 0;
+    if (c == n) {
+        let z = 0;
+        for (let i = 0; i < n; i++) {
+            z += b[a[i]];
+        }
+        return 1 / z;
     }
+    for (let i = d; i < m; i++) {
+        a[c] = i;
+        res += cQ(c + 1, i + 1, a, n, m, b);
+    }
+    return res;
 }
 
+function eXt(n, str, a) {
+    if (!s2a(str)) {
+        return false;
+    }
+    n = Number(n);
+    a = Number(a);
+    if (Number.isInteger(n) && Number.isInteger(a) && s2a(str).length == 1 && s2a(str)[0] <= 1 && s2a(str)[0] >= 0 && a >= 0 && n >= a && n != 0) {
+        return true;
+    }
+    return false;
+}
 
-var normalf = [2.86652E-05, 3.01896E-05, 3.17921E-05, 3.34765E-05, 3.52466E-05, 3.71067E-05, 3.90613E-05, 4.11148E-05, 4.32721E-05, 4.55382E-05,
+function qWt(str) {
+    if (!s2a(str)) {
+        return false;
+    }
+    let a = s2a(str);
+    let p = 0;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] <= 0 || a[i] > 1) {
+            return false;
+        }
+        p += a[i]
+    }
+    if (p > 1) {
+        return false;
+    }
+    return true;
+}
+
+function gLt(str, s) {
+    if (!s2a(str)) {
+        return false;
+    }
+    let a = s2a(str);
+    let p = 0;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] <= 0 || a[i] > 1) {
+            return false;
+        }
+        p += a[i]
+    }
+    if (p > 1) {
+        return false;
+    }
+    s = Number(s);
+    if (Number.isInteger(s) && s > 0) {
+        return true;
+    }
+    return false;
+}
+
+let normalf = [2.86652E-05, 3.01896E-05, 3.17921E-05, 3.34765E-05, 3.52466E-05, 3.71067E-05, 3.90613E-05, 4.11148E-05, 4.32721E-05, 4.55382E-05,
     4.79183E-05, 5.0418E-05, 5.30429E-05, 5.57991E-05, 5.86929E-05, 6.17307E-05, 6.49196E-05, 6.82665E-05, 7.17791E-05, 7.54651E-05,
     7.93328E-05, 8.33907E-05, 8.76476E-05, 9.2113E-05, 9.67965E-05, 0.000101708, 0.000106859, 0.00011226, 0.000117922, 0.000123858,
     0.000130081, 0.000136603, 0.000143437, 0.0001506, 0.000158105, 0.000165968, 0.000174205, 0.000182833, 0.00019187, 0.000201334,

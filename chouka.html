@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
@@ -17,28 +16,29 @@
     <div class="container d-flex align-items-center">
         <div class="form-holder has-shadow">
             <div class="row">
-                <!-- Logo & Information Panel-->
                 <div class="col-lg-6">
                     <div class="info d-flex align-items-center">
                         <div class="content">
                             <div class="logo">
                                 <h1 id="resSt">点击计算这里将显示你的欧气</h1>
                             </div>
-                            <p>此界面用于计算抽到一个就停止抽取的概率</p>
-                            <p>例如抽卡出NEW,出一个即可,然后停止抽</p>
-                            <p>如果未抽到,则将已抽取次数填入抽到所用次数</p>
-                            <p>则计算出的欧气可认为是相应的人数的欧气已经超过了你的欧气</p>
-                            <p>如果需要抽中多个,请点击右下角更换</p>
+                            <p>概率输入方式:概率%概率%...</p>
+                            <p>例如两个2%,一个0.5%,两个2.5%则输入方式如下</p>
+                            <p>2%2%0.5%2.5%2.5%</p>
+                            <p>注意:概率不能为负数;概率之和不能大于1;主线出金概率1.5%</p>
+                            <p>欧气超过百分之多少,就相当于百分之多少的人没毕业</p>
+                            <p>如果未抽齐,则将已抽取次数填入抽到所用次数</p>
+                            <p>则计算出的欧气可认为是相应的人数和你一样非</p>
+                            <p>如果需要计算其他的内容,请点击右下角更换</p>
                         </div>
                     </div>
                 </div>
-                <!-- Form Panel    -->
                 <div class="col-lg-6 bg-white">
                     <div class="form d-flex align-items-center">
                         <div class="content">
                             <div class="form-group">
                                 <input id="allT" class="input-material" type="text" name="registerUsername"
-                                       placeholder="输入抽到时所用次数">
+                                       placeholder="输入抽齐时所用次数">
                             </div>
                             <div class="form-group">
                                 <input id="p1" class="input-material" type="text" name="registerPassword"
@@ -48,10 +48,11 @@
 
                             <div class="form-group">
                                 <button id="start01" type="button" name="registerSubmit" class="btn btn-primary"
-                                        onclick="f01()">计算
+                                        onclick="fChou()">计算
                                 </button>
                             </div>
                             <small>计算科研欧气值</small><a href="index.html" class="signup">&nbsp;更换</a>
+                            <small>计算抽卡期望</small><a href="qiwang.html" class="signup">&nbsp;更换</a>
                         </div>
                     </div>
                 </div>
@@ -64,16 +65,17 @@
 <script src="core.js"></script>
 <script>
 
-    function f01() {
-        var all01 = document.getElementById("allT").value;
-        var p01 = document.getElementById("p1").value;
-        var res01 = stopW(all01, p01);
-        if (res01 == '请输入正确的数字') {
-            res01 = '请输入正确的数字'
+    function fChou() {
+        let a = document.getElementById("allT").value;
+        let p = document.getElementById("p1").value;
+        let res;
+        if (!gLt(p, a)) {
+            res = "请输入正确的数字";
         } else {
-            res01 = "你的欧气超过了" + res01 + "%的人!";
+            res = Math.floor(gL(p, a) * 100000) / 1000;
+            res = "你的欧气超过了" + res + "%的人!";
         }
-        document.getElementById("resSt").innerText = res01;
+        document.getElementById("resSt").innerText = res;
     }
 
 </script>
